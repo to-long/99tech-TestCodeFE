@@ -32,4 +32,46 @@ describe("SlippageSection", () => {
     await userEvent.type(input, "2.5");
     expect(useSwapStore.getState().customSlippage).toBe("2.5");
   });
+
+  it("strips letters from the custom input", async () => {
+    renderWithIntl(<SlippageSection />);
+    await userEvent.click(screen.getByRole("button", { name: /custom/i }));
+    const input = (await screen.findByPlaceholderText("0.00")) as HTMLInputElement;
+
+    await userEvent.type(input, "abc1.5xyz");
+
+    expect(input.value).toBe("1.5");
+    expect(useSwapStore.getState().customSlippage).toBe("1.5");
+  });
+
+  it("clamps custom slippage to a maximum of 100%", async () => {
+    renderWithIntl(<SlippageSection />);
+    await userEvent.click(screen.getByRole("button", { name: /custom/i }));
+    const input = (await screen.findByPlaceholderText("0.00")) as HTMLInputElement;
+
+    await userEvent.type(input, "9999");
+
+    expect(input.value).toBe("100");
+    expect(useSwapStore.getState().customSlippage).toBe("100");
+  });
+
+  it("limits custom slippage to 2 decimal places", async () => {
+    renderWithIntl(<SlippageSection />);
+    await userEvent.click(screen.getByRole("button", { name: /custom/i }));
+    const input = (await screen.findByPlaceholderText("0.00")) as HTMLInputElement;
+
+    await userEvent.type(input, "0.12345");
+
+    expect(input.value).toBe("0.12");
+  });
+
+  it("collapses multiple decimal points in the custom input", async () => {
+    renderWithIntl(<SlippageSection />);
+    await userEvent.click(screen.getByRole("button", { name: /custom/i }));
+    const input = (await screen.findByPlaceholderText("0.00")) as HTMLInputElement;
+
+    await userEvent.type(input, "1.5.7");
+
+    expect(input.value).toBe("1.57");
+  });
 });
