@@ -8,5 +8,10 @@
   "swap.networkFee": "Network Fee",
   "swap.button": "Swap Tokens",
   "swap.swapping": "Swapping...",
-  "swap.footer": "Protected by Switcheo TradeShield"
+  "swap.footer": "Protected by Switcheo TradeShield",
+  "swap.error.required": "Enter an amount",
+  "swap.error.invalid": "Invalid number",
+  "swap.error.tooSmall": "Amount must be greater than 0",
+  "swap.error.tooManyDecimals": "Too many decimal places",
+  "swap.error.exceedsBalance": "Insufficient {symbol} balance"
 }

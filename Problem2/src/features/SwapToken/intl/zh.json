@@ -8,5 +8,10 @@
   "swap.networkFee": "网络费用",
   "swap.button": "兑换代币",
   "swap.swapping": "兑换中...",
-  "swap.footer": "由 Switcheo TradeShield 保护"
+  "swap.footer": "由 Switcheo TradeShield 保护",
+  "swap.error.required": "请输入金额",
+  "swap.error.invalid": "无效的数字",
+  "swap.error.tooSmall": "金额必须大于 0",
+  "swap.error.tooManyDecimals": "小数位数过多",
+  "swap.error.exceedsBalance": "{symbol} 余额不足"
 }

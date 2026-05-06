@@ -8,5 +8,10 @@
   "swap.networkFee": "ค่าธรรมเนียมเครือข่าย",
   "swap.button": "แลกเปลี่ยนโทเค็น",
   "swap.swapping": "กำลังแลกเปลี่ยน...",
-  "swap.footer": "ได้รับการคุ้มครองโดย Switcheo TradeShield"
+  "swap.footer": "ได้รับการคุ้มครองโดย Switcheo TradeShield",
+  "swap.error.required": "กรุณาใส่จำนวน",
+  "swap.error.invalid": "ตัวเลขไม่ถูกต้อง",
+  "swap.error.tooSmall": "จำนวนต้องมากกว่า 0",
+  "swap.error.tooManyDecimals": "ทศนิยมมากเกินไป",
+  "swap.error.exceedsBalance": "ยอด {symbol} ไม่เพียงพอ"
 }

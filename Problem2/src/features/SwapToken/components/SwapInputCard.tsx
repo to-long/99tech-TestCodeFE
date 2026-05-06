@@ -16,10 +16,22 @@ interface Props {
   swapping: boolean;
   onTokenClick: () => void;
   onAmountChange?: (value: string) => void;
+  /** Translated validation error to render below the input (variant="from" only). */
+  errorMessage?: string;
 }
 
 const SwapInputCard = forwardRef<HTMLDivElement, Props>(function SwapInputCard(
-  { variant, token, amount, usdValue, offset, swapping, onTokenClick, onAmountChange },
+  {
+    variant,
+    token,
+    amount,
+    usdValue,
+    offset,
+    swapping,
+    onTokenClick,
+    onAmountChange,
+    errorMessage,
+  },
   ref,
 ) {
   const t = useT();
@@ -28,6 +40,7 @@ const SwapInputCard = forwardRef<HTMLDivElement, Props>(function SwapInputCard(
     variant === "from"
       ? token.balance.toLocaleString()
       : token.balance.toLocaleString(undefined, { minimumFractionDigits: 2 });
+  const hasError = variant === "from" && Boolean(errorMessage);
 
   return (
     <div
@@ -47,14 +60,22 @@ const SwapInputCard = forwardRef<HTMLDivElement, Props>(function SwapInputCard(
           {t("swap.balance", { balance: balanceFormatted, symbol: token.symbol })}
         </span>
       </div>
-      <div className="flex h-[72px] items-center justify-between rounded-xl border border-[var(--s-border)] bg-[var(--s-field)] px-4 transition-colors duration-300">
+      <div
+        className={`flex h-[72px] items-center justify-between rounded-xl border bg-[var(--s-field)] px-4 transition-colors duration-300 ${
+          hasError ? "border-[#E04F4F]" : "border-[var(--s-border)]"
+        }`}
+      >
         <TokenBadge token={token} onClick={onTokenClick} />
         <div className="flex flex-col items-end gap-0.5">
           {variant === "from" ? (
             <input
               type="text"
+              inputMode="decimal"
+              autoComplete="off"
+              spellCheck={false}
               value={amount as string}
               onChange={(e) => onAmountChange?.(e.target.value)}
+              aria-invalid={hasError}
               className="w-28 bg-transparent text-right font-['Funnel_Sans'] text-[28px] font-extrabold text-[var(--s-text)] outline-none"
             />
           ) : (
@@ -67,6 +88,11 @@ const SwapInputCard = forwardRef<HTMLDivElement, Props>(function SwapInputCard(
           </span>
         </div>
       </div>
+      {hasError && (
+        <span className="font-['Geist'] text-xs text-[#E04F4F]" role="alert">
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 });
