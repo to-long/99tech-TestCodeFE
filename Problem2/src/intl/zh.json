@@ -1,0 +1,38 @@
+{
+  "brand.name": "SwapHub",
+  "brand.subtitle": "去中心化交易所",
+
+  "swap.title": "代币兑换",
+  "swap.youPay": "支付",
+  "swap.youReceive": "收到",
+  "swap.balance": "余额: {balance} {symbol}",
+  "swap.exchangeRate": "汇率",
+  "swap.maxSlippage": "最大滑点",
+  "swap.networkFee": "网络费用",
+  "swap.button": "兑换代币",
+  "swap.swapping": "兑换中...",
+  "swap.footer": "由 Switcheo TradeShield 保护",
+
+  "tokenSelector.title": "选择代币",
+  "tokenSelector.search": "按名称或地址搜索",
+  "tokenSelector.mostUsed": "常用",
+  "tokenSelector.available": "可用",
+
+  "settings.title": "设置",
+  "settings.slippage": "滑点容差",
+  "settings.slippageTip": "您愿意接受的最大价格变动。较高的滑点会增加交易成功的机会，但可能导致较差的汇率。",
+  "settings.custom": "自定义",
+  "settings.deadline": "交易期限",
+  "settings.deadlineTip": "如果交易挂起时间超过此期限，交易将自动撤销。",
+  "settings.deadlineUnit": "分钟",
+  "settings.network": "网络",
+  "settings.networkTip": "选择用于交换的区块链网络。不同的网络有不同的 Gas 费用。",
+  "settings.refreshRate": "价格刷新频率",
+  "settings.refreshRateTip": "自动从价格 API 获取汇率的频率。",
+  "settings.apiEndpoint": "价格 API 端点",
+  "settings.apiEndpointTip": "用于获取实时代币价格以计算汇率的 API 端点。",
+  "settings.expertMode": "专家模式",
+  "settings.expertModeDesc": "允许高滑点交易",
+  "settings.multihop": "多跳交易",
+  "settings.multihopDesc": "通过多个池路由"
+}
