@@ -26,8 +26,15 @@ export type AmountErrorKey = (typeof AMOUNT_ERROR_KEYS)[number];
  * Strip everything that isn't a digit or a single decimal point, drop
  * leading zeros, and clamp decimal precision. Safe to run on every
  * `onChange` and on pasted input.
+ *
+ * `maxDecimals` defaults to `MAX_DECIMALS` (18, the ERC-20 ceiling) for
+ * swap amounts; pass a smaller value for narrower inputs (e.g. `2` for
+ * slippage percentages).
  */
-export function sanitizeAmount(input: string): string {
+export function sanitizeAmount(
+  input: string,
+  maxDecimals: number = MAX_DECIMALS,
+): string {
   // Only digits and dots
   let cleaned = input.replace(/[^\d.]/g, "");
 
@@ -42,8 +49,8 @@ export function sanitizeAmount(input: string): string {
   // Limit decimal places
   if (firstDot !== -1) {
     const [whole, decimals = ""] = cleaned.split(".");
-    if (decimals.length > MAX_DECIMALS) {
-      cleaned = `${whole}.${decimals.slice(0, MAX_DECIMALS)}`;
+    if (decimals.length > maxDecimals) {
+      cleaned = `${whole}.${decimals.slice(0, maxDecimals)}`;
     }
   }
 
@@ -58,46 +65,47 @@ export function sanitizeAmount(input: string): string {
   return cleaned;
 }
 
+/** Matches digits with at most one decimal point: "", "1", "1.", ".5", "1.23" all OK. */
+const AMOUNT_PATTERN = /^\d*\.?\d*$/;
+
 /**
  * Build a `zod` schema for the swap "from amount" against a given balance.
- * The schema validates a string and surfaces i18n keys as error messages,
- * with the first failing rule taking precedence (`superRefine` early-exits).
+ *
+ * Each rule uses the most idiomatic zod combinator:
+ * - `.min(1)` catches an empty string
+ * - `.regex(AMOUNT_PATTERN)` catches stray characters / format issues
+ * - `.refine(decimals)` enforces the ERC-20 18-decimal ceiling
+ * - `.transform()` parses to a number (so the rest of the chain works in
+ *   numeric space) and emits an extra "invalid" issue for edge cases the
+ *   regex misses (e.g. a bare ".")
+ * - `.pipe(z.number().positive().max(balance))` covers ≤ 0 and > balance
+ *
+ * Each check carries an i18n key as its `message`, so the UI just looks
+ * up `error.issues[0].message`.
  */
 export function buildAmountSchema(balance: number) {
-  return z.string().superRefine((value, ctx) => {
-    if (!value) {
-      ctx.addIssue({ code: "custom", message: "swap.error.required" });
-      return;
-    }
-
-    const parsed = parseFloat(value);
-    if (Number.isNaN(parsed) || !Number.isFinite(parsed)) {
-      ctx.addIssue({ code: "custom", message: "swap.error.invalid" });
-      return;
-    }
-
-    if (parsed <= 0) {
-      ctx.addIssue({ code: "custom", message: "swap.error.tooSmall" });
-      return;
-    }
-
-    const decimals = value.includes(".") ? value.split(".")[1].length : 0;
-    if (decimals > MAX_DECIMALS) {
-      ctx.addIssue({
-        code: "custom",
-        message: "swap.error.tooManyDecimals",
-      });
-      return;
-    }
-
-    if (parsed > balance) {
-      ctx.addIssue({
-        code: "custom",
-        message: "swap.error.exceedsBalance",
-      });
-      return;
-    }
-  });
+  return z
+    .string()
+    .min(1, { message: "swap.error.required" })
+    .regex(AMOUNT_PATTERN, { message: "swap.error.invalid" })
+    .refine(
+      (value) => (value.split(".")[1]?.length ?? 0) <= MAX_DECIMALS,
+      { message: "swap.error.tooManyDecimals" },
+    )
+    .transform((value, ctx) => {
+      const parsed = parseFloat(value);
+      if (Number.isNaN(parsed) || !Number.isFinite(parsed)) {
+        ctx.addIssue({ code: "custom", message: "swap.error.invalid" });
+        return z.NEVER;
+      }
+      return parsed;
+    })
+    .pipe(
+      z
+        .number()
+        .positive({ message: "swap.error.tooSmall" })
+        .max(balance, { message: "swap.error.exceedsBalance" }),
+    );
 }
 
 /**

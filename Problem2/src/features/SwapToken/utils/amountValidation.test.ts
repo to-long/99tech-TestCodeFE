@@ -34,6 +34,11 @@ describe("sanitizeAmount", () => {
     expect(result).toBe("0.123456789012345678");
   });
 
+  it("respects a custom maxDecimals argument", () => {
+    expect(sanitizeAmount("0.12345", 2)).toBe("0.12");
+    expect(sanitizeAmount("1.999", 0)).toBe("1.");
+  });
+
   it("rewrites a bare '.' as '0.'", () => {
     expect(sanitizeAmount(".")).toBe("0.");
   });
