@@ -25,6 +25,10 @@ export default function DeadlineSection() {
       <div
         className="flex h-11 cursor-text items-center justify-between rounded-lg bg-[var(--s-field)] px-3.5"
         onClick={() => {
+          // Don't re-seed the input while the user is already editing —
+          // bubbled clicks (e.g. from `userEvent.type` first focusing) would
+          // otherwise wipe what they've typed.
+          if (editing) return;
           setEditing(true);
           setInput(String(deadline));
         }}
