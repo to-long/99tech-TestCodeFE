@@ -39,7 +39,7 @@ export default function TokenSelector({ selectedSymbol, onSelect, onClose }: Pro
       }}
     >
       <div
-        className="w-[380px] overflow-hidden rounded-2xl bg-[var(--s-card)] shadow-[0_8px_24px_var(--s-shadow)] transition-all duration-300"
+        className="mx-3 w-full max-w-[380px] overflow-hidden rounded-2xl bg-[var(--s-card)] shadow-[0_8px_24px_var(--s-shadow)] transition-all duration-300"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "scale(1) translateY(0)" : "scale(0.95) translateY(16px)",

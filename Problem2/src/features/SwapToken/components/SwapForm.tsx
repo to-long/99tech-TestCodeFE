@@ -21,7 +21,10 @@ export default function SwapForm() {
 
   return (
     <>
-      <div className="w-[380px] [perspective:1200px]">
+      {/* Keep `w-[380px]` literal so `useTooltipPosition` can locate the card
+          boundary via `.closest(".w-\\[380px\\]")`. `max-w-full` lets the
+          card shrink below 380px on narrower viewports (e.g. 320px). */}
+      <div className="w-[380px] max-w-full [perspective:1200px]">
         <div
           className="relative transition-all duration-500 [transform-style:preserve-3d]"
           style={{

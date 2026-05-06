@@ -12,7 +12,7 @@ export default function App() {
     <IntlProvider messages={messages[locale]} locale={locale} defaultLocale="en">
       <div className="flex h-screen flex-col bg-background">
         <Header />
-        <main className="flex flex-1 items-center justify-center overflow-hidden bg-[var(--s-main)] transition-colors duration-300">
+        <main className="flex flex-1 items-center justify-center overflow-hidden bg-[var(--s-main)] transition-colors duration-300 p-2">
           <SwapForm />
         </main>
       </div>
