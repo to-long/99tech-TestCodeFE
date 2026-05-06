@@ -1,0 +1,19 @@
+{
+  "settings.title": "ตั้งค่า",
+  "settings.slippage": "ความทนทานต่อสลิปเพจ",
+  "settings.slippageTip": "การเปลี่ยนแปลงราคาสูงสุดที่คุณยอมรับได้ สลิปเพจที่สูงขึ้นจะเพิ่มโอกาสในการแลกเปลี่ยนสำเร็จ แต่อาจได้อัตราที่แย่ลง",
+  "settings.custom": "กำหนดเอง",
+  "settings.deadline": "กำหนดเวลาธุรกรรม",
+  "settings.deadlineTip": "ธุรกรรมของคุณจะถูกยกเลิกหากรอดำเนินการนานเกินกว่าระยะเวลานี้",
+  "settings.deadlineUnit": "นาที",
+  "settings.network": "เครือข่าย",
+  "settings.networkTip": "เลือกเครือข่ายบล็อกเชนสำหรับการแลกเปลี่ยน เครือข่ายต่างกันมีค่า Gas ต่างกัน",
+  "settings.refreshRate": "อัตราการรีเฟรชราคา",
+  "settings.refreshRateTip": "ความถี่ในการดึงอัตราแลกเปลี่ยนจาก API ราคาโดยอัตโนมัติ",
+  "settings.apiEndpoint": "จุดเชื่อมต่อ API ราคา",
+  "settings.apiEndpointTip": "จุดเชื่อมต่อ API ที่ใช้ดึงราคาโทเค็นแบบเรียลไทม์สำหรับการคำนวณอัตราแลกเปลี่ยน",
+  "settings.expertMode": "โหมดผู้เชี่ยวชาญ",
+  "settings.expertModeDesc": "อนุญาตการซื้อขายสลิปเพจสูง",
+  "settings.multihop": "การซื้อขายหลายขั้น",
+  "settings.multihopDesc": "กำหนดเส้นทางผ่านหลายพูล"
+}

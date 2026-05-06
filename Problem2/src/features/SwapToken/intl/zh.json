@@ -1,0 +1,12 @@
+{
+  "swap.title": "代币兑换",
+  "swap.youPay": "支付",
+  "swap.youReceive": "收到",
+  "swap.balance": "余额: {balance} {symbol}",
+  "swap.exchangeRate": "汇率",
+  "swap.maxSlippage": "最大滑点",
+  "swap.networkFee": "网络费用",
+  "swap.button": "兑换代币",
+  "swap.swapping": "兑换中...",
+  "swap.footer": "由 Switcheo TradeShield 保护"
+}

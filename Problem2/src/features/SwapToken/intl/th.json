@@ -1,0 +1,12 @@
+{
+  "swap.title": "แลกเปลี่ยนโทเค็น",
+  "swap.youPay": "คุณจ่าย",
+  "swap.youReceive": "คุณได้รับ",
+  "swap.balance": "ยอดคงเหลือ: {balance} {symbol}",
+  "swap.exchangeRate": "อัตราแลกเปลี่ยน",
+  "swap.maxSlippage": "สลิปเพจสูงสุด",
+  "swap.networkFee": "ค่าธรรมเนียมเครือข่าย",
+  "swap.button": "แลกเปลี่ยนโทเค็น",
+  "swap.swapping": "กำลังแลกเปลี่ยน...",
+  "swap.footer": "ได้รับการคุ้มครองโดย Switcheo TradeShield"
+}

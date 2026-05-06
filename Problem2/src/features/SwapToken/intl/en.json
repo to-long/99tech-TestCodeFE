@@ -1,0 +1,12 @@
+{
+  "swap.title": "Token Swap",
+  "swap.youPay": "You Pay",
+  "swap.youReceive": "You Receive",
+  "swap.balance": "Balance: {balance} {symbol}",
+  "swap.exchangeRate": "Exchange Rate",
+  "swap.maxSlippage": "Max Slippage",
+  "swap.networkFee": "Network Fee",
+  "swap.button": "Swap Tokens",
+  "swap.swapping": "Swapping...",
+  "swap.footer": "Protected by Switcheo TradeShield"
+}
