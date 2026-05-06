@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #fafafa;
+  --color-foreground: #2A2933;
+  --color-card: #ffffff;
+  --color-card-foreground: #2A2933;
+  --color-primary: #5749F4;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #D9D9DB;
+  --color-secondary-foreground: #2A2933;
+  --color-muted: #F5F5F5;
+  --color-muted-foreground: #616167;
+  --color-accent: #F5F5F5;
+  --color-accent-foreground: #2A2933;
+  --color-destructive: #CC3314;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #C5C5CB;
+  --color-input: #C5C5CB;
+  --color-ring: #E1E2E5;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #2A2933;
+
+  --radius-xs: 6px;
+  --radius-m: 24px;
+  --radius-l: 40px;
+  --radius-pill: 999px;
+}
+
+/* ── Swap theme tokens ── */
+:root {
+  --s-card: #ffffff;
+  --s-main: #E8F0ED;
+  --s-field: #F5F3EE;
+  --s-highlight: #C8DBBC;
+  --s-green-bg: #F0FDF4;
+  --s-btn: #2D5E3A;
+  --s-btn-hover: #1E4A2B;
+  --s-border: #E8E6E0;
+  --s-border-header: #E5E7EB;
+  --s-border-light: #F3F4F6;
+  --s-border-icon: #E0E0E0;
+  --s-text: #1B3A28;
+  --s-text-sub: #4A6B52;
+  --s-text-muted: #7A9B82;
+  --s-text-rate: #4A7B58;
+  --s-text-dim: #888888;
+  --s-text-label: #374151;
+  --s-text-label-sub: #6B7280;
+  --s-text-label-muted: #9CA3AF;
+  --s-shield: #4A8C5E;
+  --s-shadow: #00000015;
+  --s-backdrop: rgba(0, 0, 0, 0.35);
+}
+
+.dark {
+  /* Design system overrides */
+  --color-background: #0D1510;
+  --color-foreground: #D4E8DC;
+  --color-card: #162119;
+  --color-card-foreground: #D4E8DC;
+  --color-secondary: #243D2C;
+  --color-secondary-foreground: #D4E8DC;
+  --color-muted: #1C2B22;
+  --color-muted-foreground: #8AAE96;
+  --color-accent: #1C2B22;
+  --color-accent-foreground: #D4E8DC;
+  --color-border: #2A3E32;
+  --color-input: #2A3E32;
+  --color-ring: #3A5042;
+  --color-popover: #162119;
+  --color-popover-foreground: #D4E8DC;
+
+  /* Swap theme overrides */
+  --s-card: #162119;
+  --s-main: #0D1510;
+  --s-field: #1C2B22;
+  --s-highlight: #243D2C;
+  --s-green-bg: #1A2E22;
+  --s-btn: #2D5E3A;
+  --s-btn-hover: #3A7A4D;
+  --s-border: #2A3E32;
+  --s-border-header: #2A3E32;
+  --s-border-light: #1E2E25;
+  --s-border-icon: #3A4E42;
+  --s-text: #D4E8DC;
+  --s-text-sub: #8AAE96;
+  --s-text-muted: #5C7D66;
+  --s-text-rate: #7AB088;
+  --s-text-dim: #6B7B70;
+  --s-text-label: #A0B0A6;
+  --s-text-label-sub: #7A8B82;
+  --s-text-label-muted: #5C6860;
+  --s-shield: #5CA870;
+  --s-shadow: #00000040;
+  --s-backdrop: rgba(0, 0, 0, 0.55);
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  margin: 0;
+  transition: background-color 300ms ease, color 300ms ease;
+}
