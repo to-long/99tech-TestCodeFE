@@ -6,8 +6,8 @@ const meta = {
   title: "Settings/ToggleRow",
   component: ToggleRow,
   args: {
-    label: "Expert Mode",
-    description: "Allow high-slippage trading",
+    label: "Dark Mode",
+    description: "Use dark color scheme",
     checked: false,
     onChange: () => {},
   },
@@ -23,12 +23,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const ExpertMode: Story = {};
+export const Default: Story = {};
 
-export const Multihop: Story = {
+export const Checked: Story = {
   args: {
-    label: "Multi-hop Trades",
-    description: "Route through multiple pools",
+    label: "Auto Refresh",
+    description: "Automatically refresh prices",
     checked: true,
   },
 };

@@ -13,11 +13,8 @@ export {
   closeSettings,
   setSlippage,
   setCustomSlippage,
-  setDeadline,
   setNetwork,
   setRefreshRate,
-  setExpertMode,
-  setMultihopTrades,
   fetchPrices,
 } from "./store/useSwapStore";
 export { TOKENS, MOCK_PRICES } from "./data/tokens";

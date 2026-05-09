@@ -11,11 +11,8 @@ import {
   closeSettings,
   setSlippage,
   setCustomSlippage,
-  setDeadline,
   setNetwork,
   setRefreshRate,
-  setExpertMode,
-  setMultihopTrades,
   getToAmount,
   getUsdValue,
   fetchPrices,
@@ -30,12 +27,9 @@ const initial = {
   settingsOpen: false,
   slippage: 0.5 as const,
   customSlippage: "",
-  deadline: 30,
   network: "ethereum",
-  refreshRate: 10 as const,
+  refreshRate: 5 as const,
   apiEndpoint: "https://interview.switcheo.com/prices.json",
-  expertMode: false,
-  multihopTrades: true,
   prices: MOCK_PRICES,
   fetching: false,
 };
@@ -121,19 +115,13 @@ describe("useSwapStore — settings setters", () => {
     expect(useSwapStore.getState().slippage).toBe("custom");
   });
 
-  it("setDeadline / setNetwork / setRefreshRate / setExpertMode / setMultihopTrades update the store", () => {
-    setDeadline(45);
+  it("setNetwork / setRefreshRate update the store", () => {
     setNetwork("polygon");
     setRefreshRate(60);
-    setExpertMode(true);
-    setMultihopTrades(false);
 
     const s = useSwapStore.getState();
-    expect(s.deadline).toBe(45);
     expect(s.network).toBe("polygon");
     expect(s.refreshRate).toBe(60);
-    expect(s.expertMode).toBe(true);
-    expect(s.multihopTrades).toBe(false);
   });
 });
 

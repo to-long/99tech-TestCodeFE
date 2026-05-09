@@ -24,8 +24,8 @@ export const Default: Story = {};
 
 export const LongTooltip: Story = {
   args: {
-    label: "Multi-hop Trades",
+    label: "Price Refresh Rate",
     tooltip:
-      "Route trades through multiple pools to find the best price — adds complexity but can save on slippage.",
+      "How often exchange rates are automatically fetched from the price API to keep your swap quotes up to date.",
   },
 };

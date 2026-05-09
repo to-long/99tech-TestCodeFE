@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Check } from "lucide-react";
 import type { LanguageOption as LanguageOptionData } from "../data/languages";
 
@@ -5,13 +6,15 @@ interface Props {
   lang: LanguageOptionData;
   isSelected: boolean;
   onSelect: () => void;
+  style?: CSSProperties;
 }
 
-export default function LanguageOption({ lang, isSelected, onSelect }: Props) {
+export default function LanguageOption({ lang, isSelected, onSelect, style }: Props) {
   return (
     <button
       onClick={onSelect}
-      className={`flex h-10 items-center gap-3 rounded-[8px] px-3 ${
+      style={style}
+      className={`flex h-10 items-center gap-3 rounded-[8px] px-3 transition-colors duration-150 ${
         isSelected ? "bg-[var(--s-green-bg)]" : "hover:bg-muted"
       }`}
     >

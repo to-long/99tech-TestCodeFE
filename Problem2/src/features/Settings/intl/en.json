@@ -3,17 +3,10 @@
   "settings.slippage": "Slippage Tolerance",
   "settings.slippageTip": "Maximum price change you're willing to accept. Higher slippage increases the chance of a successful swap but may result in a worse rate.",
   "settings.custom": "Custom",
-  "settings.deadline": "Transaction Deadline",
-  "settings.deadlineTip": "Your transaction will revert if it is pending for longer than this period of time.",
-  "settings.deadlineUnit": "minutes",
   "settings.network": "Network",
   "settings.networkTip": "Select the blockchain network for your swap. Different networks have different gas fees.",
   "settings.refreshRate": "Price Refresh Rate",
   "settings.refreshRateTip": "How often exchange rates are automatically fetched from the price API.",
   "settings.apiEndpoint": "Price API Endpoint",
-  "settings.apiEndpointTip": "The API endpoint used to fetch live token prices for exchange rate calculations.",
-  "settings.expertMode": "Expert Mode",
-  "settings.expertModeDesc": "Allow high slippage trades",
-  "settings.multihop": "Multi-hop Trades",
-  "settings.multihopDesc": "Route through multiple pools"
+  "settings.apiEndpointTip": "The API endpoint used to fetch live token prices for exchange rate calculations."
 }

@@ -13,12 +13,9 @@ interface SwapState {
   settingsOpen: boolean;
   slippage: SlippagePreset | "custom";
   customSlippage: string;
-  deadline: number;
   network: string;
   refreshRate: RefreshRate;
   apiEndpoint: string;
-  expertMode: boolean;
-  multihopTrades: boolean;
   prices: Record<string, number>;
   fetching: boolean;
 }
@@ -34,12 +31,9 @@ const ACTIONS = {
   closeSettings: "swap/settings:close",
   setSlippage: "swap/slippage:set",
   setCustomSlippage: "swap/customSlippage:set",
-  setDeadline: "swap/deadline:set",
   setNetwork: "swap/network:set",
   setRefreshRate: "swap/refreshRate:set",
   setApiEndpoint: "swap/apiEndpoint:set",
-  setExpertMode: "swap/expertMode:set",
-  setMultihopTrades: "swap/multihopTrades:set",
   setPrices: "swap/prices:set",
   setFetching: "swap/fetching:set",
 } as const;
@@ -53,12 +47,9 @@ export const useSwapStore = createStore<SwapState>(
     settingsOpen: false,
     slippage: 0.5,
     customSlippage: "",
-    deadline: 30,
     network: "ethereum",
-    refreshRate: 10,
+    refreshRate: 5,
     apiEndpoint: "https://interview.switcheo.com/prices.json",
-    expertMode: false,
-    multihopTrades: true,
     prices: MOCK_PRICES,
     fetching: false,
   }),
@@ -156,10 +147,6 @@ export function setCustomSlippage(value: string): void {
   useSwapStore.setState({ customSlippage: value, slippage: "custom" }, false, ACTIONS.setCustomSlippage);
 }
 
-export function setDeadline(value: number): void {
-  useSwapStore.setState({ deadline: value }, false, ACTIONS.setDeadline);
-}
-
 export function setNetwork(value: string): void {
   useSwapStore.setState({ network: value }, false, ACTIONS.setNetwork);
 }
@@ -170,14 +157,6 @@ export function setRefreshRate(value: RefreshRate): void {
 
 export function setApiEndpoint(value: string): void {
   useSwapStore.setState({ apiEndpoint: value }, false, ACTIONS.setApiEndpoint);
-}
-
-export function setExpertMode(value: boolean): void {
-  useSwapStore.setState({ expertMode: value }, false, ACTIONS.setExpertMode);
-}
-
-export function setMultihopTrades(value: boolean): void {
-  useSwapStore.setState({ multihopTrades: value }, false, ACTIONS.setMultihopTrades);
 }
 
 // ── Price fetching ──

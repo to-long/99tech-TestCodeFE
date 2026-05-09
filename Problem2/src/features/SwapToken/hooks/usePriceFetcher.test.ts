@@ -6,7 +6,7 @@ import { useSwapStore } from "../store/useSwapStore";
 beforeEach(() => {
   vi.useFakeTimers();
   globalThis.fetch = vi.fn().mockResolvedValue({ json: async () => [] }) as unknown as typeof fetch;
-  useSwapStore.setState({ refreshRate: 10 });
+  useSwapStore.setState({ refreshRate: 5 });
 });
 
 afterEach(() => {
@@ -23,10 +23,10 @@ describe("usePriceFetcher", () => {
     renderHook(() => usePriceFetcher());
     expect(globalThis.fetch).toHaveBeenCalledTimes(1);
 
-    vi.advanceTimersByTime(10_000);
+    vi.advanceTimersByTime(5_000);
     expect(globalThis.fetch).toHaveBeenCalledTimes(2);
 
-    vi.advanceTimersByTime(10_000);
+    vi.advanceTimersByTime(5_000);
     expect(globalThis.fetch).toHaveBeenCalledTimes(3);
   });
 
