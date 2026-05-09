@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
 import { screen, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { renderWithIntl } from "../../../test/renderWithIntl";
+import { renderWithIntl } from "@test/renderWithIntl";
 import SwapCardBody from "./SwapCardBody";
 import { useSwapStore } from "../store/useSwapStore";
 import { TOKENS, MOCK_PRICES } from "../data/tokens";

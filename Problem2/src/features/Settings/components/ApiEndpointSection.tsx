@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Copy, Check } from "lucide-react";
 import { useSwapStore } from "../../SwapToken/store/useSwapStore";
-import { useT } from "../../../shared/hooks/useT";
+import { useT } from "@shared/hooks/useT";
 import { copyToClipboard } from "../utils/clipboard";
 import SectionHeader from "./SectionHeader";
 

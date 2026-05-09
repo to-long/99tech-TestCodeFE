@@ -1,6 +1,6 @@
 import { Repeat, Settings } from "lucide-react";
 import { openSettings } from "../store/useSwapStore";
-import { useT } from "../../../shared/hooks/useT";
+import { useT } from "@shared/hooks/useT";
 
 export default function SwapHeader() {
   const t = useT();

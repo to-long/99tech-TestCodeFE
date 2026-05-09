@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { screen, fireEvent, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { renderWithIntl } from "../../../test/renderWithIntl";
+import { renderWithIntl } from "@test/renderWithIntl";
 import SwapActionButton from "./SwapActionButton";
 
 afterEach(() => {

@@ -1,7 +1,7 @@
 import { RefreshCw, Settings2, Globe } from "lucide-react";
 import { useSwapStore } from "../store/useSwapStore";
-import { useT } from "../../../shared/hooks/useT";
-import { formatAmount } from "../../../shared/utils/formatNumber";
+import { useT } from "@shared/hooks/useT";
+import { formatAmount } from "@shared/utils/formatNumber";
 import { getNetwork } from "../../Settings/data/networks";
 
 export default function SwapRateInfo() {

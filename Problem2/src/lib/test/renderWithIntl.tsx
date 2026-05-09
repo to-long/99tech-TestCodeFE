@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { render } from "@testing-library/react";
 import { IntlProvider } from "react-intl";
-import { messages } from "../intl";
+import { messages } from "@/intl";
 
 /**
  * Wrap a component in `IntlProvider` with the merged English message map so

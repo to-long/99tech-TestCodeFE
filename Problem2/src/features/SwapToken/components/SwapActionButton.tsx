@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
-import { useT } from "../../../shared/hooks/useT";
+import { useT } from "@shared/hooks/useT";
 
 const PENDING_MS = 3000;
 

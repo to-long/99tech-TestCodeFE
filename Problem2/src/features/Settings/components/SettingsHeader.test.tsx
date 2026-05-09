@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { renderWithIntl } from "../../../test/renderWithIntl";
+import { renderWithIntl } from "@test/renderWithIntl";
 import SettingsHeader from "./SettingsHeader";
 import { useSwapStore, openSettings } from "../../SwapToken/store/useSwapStore";
 

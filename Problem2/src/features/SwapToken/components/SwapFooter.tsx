@@ -1,5 +1,5 @@
 import { ShieldCheck } from "lucide-react";
-import { useT } from "../../../shared/hooks/useT";
+import { useT } from "@shared/hooks/useT";
 
 export default function SwapFooter() {
   const t = useT();

@@ -531,8 +531,8 @@
     {
       "type": "frame",
       "id": "FplOT",
-      "x": 2164,
-      "y": 2294.0782055206805,
+      "x": 2373,
+      "y": 2282.0782055206805,
       "name": "Token Selector",
       "rotation": 0.011791700792764738,
       "width": 380,
@@ -1168,8 +1168,8 @@
     {
       "type": "frame",
       "id": "hjpxh",
-      "x": 2526,
-      "y": 3313,
+      "x": 2493,
+      "y": 3193,
       "name": "Network Selector",
       "width": 260,
       "fill": "#FFFFFF",
@@ -2575,7 +2575,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "./images/generated-1778084545296.png",
+                "url": "images/generated-1778084545296.png",
                 "mode": "fill"
               },
               "cornerRadius": 3,
@@ -2647,7 +2647,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "./images/generated-1778084537079.png",
+                "url": "images/generated-1778084537079.png",
                 "mode": "fill"
               },
               "cornerRadius": 3,

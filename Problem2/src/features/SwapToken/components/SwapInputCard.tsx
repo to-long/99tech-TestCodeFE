@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { Token } from "../types/token";
-import { formatAmount } from "../../../shared/utils/formatNumber";
-import { useT } from "../../../shared/hooks/useT";
+import { formatAmount } from "@shared/utils/formatNumber";
+import { useT } from "@shared/hooks/useT";
 import TokenBadge from "./TokenBadge";
 
 interface Props {

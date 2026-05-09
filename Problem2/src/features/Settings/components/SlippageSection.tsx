@@ -1,5 +1,5 @@
 import { useSwapStore, setSlippage, setCustomSlippage } from "../../SwapToken/store/useSwapStore";
-import { useT } from "../../../shared/hooks/useT";
+import { useT } from "@shared/hooks/useT";
 import { sanitizeAmount } from "../../SwapToken/utils/amountValidation";
 import { SLIPPAGE_PRESETS } from "../data/presets";
 import SectionHeader from "./SectionHeader";

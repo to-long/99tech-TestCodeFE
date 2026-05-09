@@ -1,5 +1,5 @@
 import { useSwapStore, setRefreshRate } from "../../SwapToken/store/useSwapStore";
-import { useT } from "../../../shared/hooks/useT";
+import { useT } from "@shared/hooks/useT";
 import { REFRESH_RATES } from "../data/presets";
 import SectionHeader from "./SectionHeader";
 

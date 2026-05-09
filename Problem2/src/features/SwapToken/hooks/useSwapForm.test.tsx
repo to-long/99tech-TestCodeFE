@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { Controller, useFormContext, FormProvider } from "react-hook-form";
-import { useT as _useT } from "../../../shared/hooks/useT";
-import { renderWithIntl } from "../../../test/renderWithIntl";
+import { useT as _useT } from "@shared/hooks/useT";
+import { renderWithIntl } from "@test/renderWithIntl";
 import { IntlProvider } from "react-intl";
-import { messages } from "../../../intl";
+import { messages } from "@/intl";
 import type { ReactNode } from "react";
 import { useSwapForm, buildAmountRules } from "./useSwapForm";
 import { useSwapStore } from "../store/useSwapStore";

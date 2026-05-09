@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Info } from "lucide-react";
-import { useClickOutside } from "../../../shared/hooks/useClickOutside";
+import { useClickOutside } from "@shared/hooks/useClickOutside";
 import { useTooltipPosition } from "../hooks/useTooltipPosition";
 
 interface Props {

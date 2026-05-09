@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { renderWithIntl } from "../../../test/renderWithIntl";
+import { renderWithIntl } from "@test/renderWithIntl";
 import SwapInputCard from "./SwapInputCard";
 
 const token = { symbol: "ETH", name: "Ethereum", balance: 2.458, image: "/eth.svg" };

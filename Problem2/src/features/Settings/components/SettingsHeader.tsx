@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { closeSettings } from "../../SwapToken/store/useSwapStore";
-import { useT } from "../../../shared/hooks/useT";
+import { useT } from "@shared/hooks/useT";
 
 export default function SettingsHeader() {
   const t = useT();

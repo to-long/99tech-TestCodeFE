@@ -1,5 +1,5 @@
 import type { Token } from "../../SwapToken/types/token";
-import { formatBalance } from "../../../shared/utils/formatNumber";
+import { formatBalance } from "@shared/utils/formatNumber";
 
 interface Props {
   token: Token;

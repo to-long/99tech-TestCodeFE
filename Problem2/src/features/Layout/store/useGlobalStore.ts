@@ -1,4 +1,4 @@
-import { createStore } from "../../../shared/lib/zustand/createStore";
+import { createStore } from "@lib/zustand/createStore";
 
 export type Language = "EN" | "ZH" | "TH";
 type Theme = "light" | "dark";

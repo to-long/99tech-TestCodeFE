@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { renderWithIntl } from "../../../test/renderWithIntl";
+import { renderWithIntl } from "@test/renderWithIntl";
 import RefreshRateSection from "./RefreshRateSection";
 import { useSwapStore, setRefreshRate } from "../../SwapToken/store/useSwapStore";
 

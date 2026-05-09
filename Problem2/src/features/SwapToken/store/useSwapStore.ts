@@ -1,4 +1,4 @@
-import { createStore } from "../../../shared/lib/zustand/createStore";
+import { createStore } from "@lib/zustand/createStore";
 import type { Token } from "../types/token";
 import { TOKENS, MOCK_PRICES } from "../data/tokens";
 

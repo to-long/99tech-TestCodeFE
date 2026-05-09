@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { screen } from "@testing-library/react";
-import { renderWithIntl } from "../../../test/renderWithIntl";
+import { renderWithIntl } from "@test/renderWithIntl";
 import SwapTokenSelectorOverlay from "./SwapTokenSelectorOverlay";
 import { useSwapStore } from "../store/useSwapStore";
 import { TOKENS } from "../data/tokens";
