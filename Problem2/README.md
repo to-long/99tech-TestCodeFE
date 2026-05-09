@@ -1,6 +1,6 @@
 # Problem 2 — Swap Token Interface
 
-A single-page token swap interface built with **React 19**, **TypeScript 5.8**, **Vite 6**, **Tailwind CSS v4**, and **Zustand 5**. Users can swap between 32 tokens with live exchange rates fetched from a remote API, with a fully validated input form, a 162-test unit suite, and a Storybook component catalog.
+A single-page token swap interface built with **React 19**, **TypeScript 5.8**, **Vite 6**, **Tailwind CSS v4**, and **Zustand 5**. Users can swap between 32 tokens with live exchange rates fetched from a remote API, with a fully validated input form, a 166-test unit suite, and a 26-story Storybook component catalog.
 
 ## Quick Start
 
@@ -45,7 +45,7 @@ Problem2/
 ├── index.html
 ├── package.json
 ├── vite.config.ts                              # Vite + vitest config (jsdom env)
-├── tsconfig.json
+├── tsconfig.json                               # Path aliases: @, @lib, @shared, @test
 ├── .storybook/                                 # Storybook config (Tailwind, i18n, theme decorators)
 │   ├── main.ts
 │   ├── preview.tsx
@@ -54,18 +54,21 @@ Problem2/
     ├── main.tsx                                # Entry point
     ├── App.tsx                                 # Root with IntlProvider
     ├── intl.ts                                 # Merges per-feature i18n maps
-    ├── index.css                               # Theme tokens (light + dark)
+    ├── index.css                               # Theme tokens (light + dark) + dropdown keyframes
     │
-    ├── test/
-    │   ├── setup.ts                            # jest-dom matchers + cleanup
-    │   └── renderWithIntl.tsx                  # Test helper (IntlProvider)
+    ├── lib/
+    │   ├── zustand/
+    │   │   └── createStore.ts                  # Zustand wrapper with action labels
+    │   └── test/
+    │       ├── setup.ts                        # jest-dom matchers + cleanup
+    │       └── renderWithIntl.tsx              # Test helper (IntlProvider)
     │
     ├── features/
     │   ├── Layout/                             # Header, branding, global controls
     │   │   ├── components/
     │   │   │   ├── Header.tsx
     │   │   │   ├── Logo.tsx
-    │   │   │   ├── LanguageSelector.tsx
+    │   │   │   ├── LanguageSelector.tsx         # Animated dropdown via useDropdown
     │   │   │   ├── LanguageOption.tsx
     │   │   │   └── ThemeSwitcher.tsx
     │   │   ├── store/
@@ -111,8 +114,7 @@ Problem2/
     │   │   │   ├── Toggle.tsx
     │   │   │   ├── ToggleRow.tsx
     │   │   │   ├── SlippageSection.tsx
-    │   │   │   ├── DeadlineSection.tsx
-    │   │   │   ├── NetworkSection.tsx
+    │   │   │   ├── NetworkSection.tsx          # Animated dropdown via useDropdown
     │   │   │   ├── NetworkIcon.tsx
     │   │   │   ├── RefreshRateSection.tsx
     │   │   │   └── ApiEndpointSection.tsx
@@ -138,11 +140,10 @@ Problem2/
     └── shared/
         ├── hooks/
         │   ├── useT.ts                         # Sugar over useIntl().formatMessage
+        │   ├── useDropdown.ts                   # Animated dropdown (spring keyframes)
         │   ├── useEscapeKey.ts
         │   └── useClickOutside.ts
-        ├── utils/formatNumber.ts               # formatAmount, formatBalance
-        └── lib/zustand/
-            └── createStore.ts                  # Zustand wrapper with action labels
+        └── utils/formatNumber.ts               # formatAmount, formatBalance
 ```
 
 Tests are co-located next to source as `*.test.ts(x)`. Stories likewise as `*.stories.tsx`.
@@ -185,12 +186,9 @@ Errors surface as a red ring around the input + a `role="alert"` message below, 
 ### Settings Panel
 
 - **Slippage tolerance** — presets (0.1%, 0.5%, 1.0%) or custom input
-- **Transaction deadline** — revert window in minutes
-- **Network** — Ethereum, Polygon, BNB Chain, Optimism, Arbitrum (with gas estimates)
-- **Price refresh rate** — 5 s / 10 s / 30 s / 60 s
+- **Network** — Ethereum, Polygon, BNB Chain, Optimism, Arbitrum (with gas estimates and animated dropdown)
+- **Price refresh rate** — 5 s (default) / 10 s / 30 s / 60 s
 - **API endpoint** — displayed with copy button
-- **Expert mode** — allow high-slippage trades
-- **Multi-hop trades** — route through multiple pools
 - Info icons (ⓘ) with click-to-show tooltips (positioned outside the card via React Portal)
 - Card flip animation between swap form ↔ settings
 
@@ -249,7 +247,7 @@ Two Zustand stores, both created via a thin wrapper that adds action labels for 
 | Store             | Responsibility                                                    |
 | ----------------- | ----------------------------------------------------------------- |
 | `useGlobalStore`  | Language (`EN`/`ZH`/`TH`), theme (`light`/`dark`), `toggleTheme`  |
-| `useSwapStore`    | Tokens, amounts, slippage, deadline, network, prices, fetching    |
+| `useSwapStore`    | Tokens, amounts, slippage, network, refresh rate, prices, fetching |
 
 Price-related pure functions (`getToAmount`, `getUsdValue`) are exported alongside the store for use in components.
 
@@ -257,16 +255,16 @@ Price-related pure functions (`getToAmount`, `getUsdValue`) are exported alongsi
 
 Run with `bun run test` (single pass) or `bun run test:watch`.
 
-- **162 tests across 40 files** covering pure utils, both stores, every shared/feature hook, every component, and an end-to-end validation flow integration test on `SwapCardBody`.
-- Coverage (v8): **91.6 %** statements / **90.5 %** branches / **89.0 %** functions / **94.0 %** lines.
-- Setup: `jsdom` environment, `@testing-library/jest-dom` matchers, automatic `cleanup()` between tests, and a `renderWithIntl()` helper that wraps the unit-under-test in `IntlProvider` with the merged English message map.
+- **166 tests across 39 files** covering pure utils, both stores, every shared/feature hook, every component, and an end-to-end validation flow integration test on `SwapCardBody`.
+- Coverage (v8): **92.4 %** statements / **89.3 %** branches / **90.0 %** functions / **94.3 %** lines.
+- Setup: `jsdom` environment, `@testing-library/jest-dom` matchers, automatic `cleanup()` between tests, and a `renderWithIntl()` helper (`@test/renderWithIntl`) that wraps the unit-under-test in `IntlProvider` with the merged English message map.
 - The zod schema in `amountValidation.ts` is exercised directly (each issue's `message` is the i18n key) and indirectly through `useSwapForm`.
 
 ## Storybook
 
 Run with `bun run storybook` (dev) or `bun run build-storybook` (static).
 
-- 27 story files spanning all four feature slices — each component has at least one story; complex ones (`SwapInputCard`, `LanguageSelector`, `Toggle`, …) include multiple variants.
+- 26 story files spanning all four feature slices — each component has at least one story; complex ones (`SwapInputCard`, `LanguageSelector`, `Toggle`, …) include multiple variants.
 - The Tailwind v4 `@tailwindcss/vite` plugin is registered via `viteFinal` in `.storybook/main.ts` so utility classes compile correctly inside the Storybook iframe.
 - A global `IntlProvider` decorator wraps every story; a toolbar locale switcher lets you flip stories between EN / ZH / TH.
 - A light/dark toolbar (`@storybook/addon-themes`, toggling `.dark` on `<html>`) and matching background swatches preview both themes.
@@ -275,6 +273,8 @@ Run with `bun run storybook` (dev) or `bun run build-storybook` (static).
 ## Architectural Notes
 
 - **Feature slice pattern.** Each feature (`Layout`, `SwapToken`, `Settings`, `SelectToken`) owns its own components, hooks, store, data, utils, and i18n. Cross-feature imports use relative paths to a sibling feature's barrel.
+- **Path aliases.** `@` → `src/`, `@lib` → `src/lib/`, `@shared` → `src/shared/`, `@test` → `src/lib/test/` — configured in both `tsconfig.json` and `vite.config.ts`. No `../../../` imports anywhere.
 - **One component per file.** Large flows like `SwapForm` and `SettingsPanel` are decomposed into small, individually testable components and hooks. The largest component file is currently ~85 lines.
+- **Shared animated dropdown.** The `useDropdown` hook (`@shared/hooks/useDropdown`) provides spring-curve open/close animations with staggered item entrances via CSS `@keyframes`. Used by both `LanguageSelector` and `NetworkSection`.
 - **Single source of truth for validation.** The `buildAmountSchema(balance)` zod schema is shared between `validateAmount()` (used in tests) and `useSwapForm`'s react-hook-form rules — there is no duplicate `if/else` validation anywhere.
 - **No Tailwind `dark:` variants.** Theming flows entirely through the `--s-*` CSS custom properties, so a single `.dark` class on `<html>` flips every themed surface at once.
