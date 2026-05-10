@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { useSwapStore, setSlippage, setCustomSlippage } from "../../SwapToken/store/useSwapStore";
 import { useT } from "@shared/hooks/useT";
+import { useDebouncedCallback } from "@shared/hooks/useDebouncedCallback";
 import { sanitizeAmount } from "../../SwapToken/utils/amountValidation";
 import { SLIPPAGE_PRESETS } from "../data/presets";
 import SectionHeader from "./SectionHeader";
@@ -19,11 +21,25 @@ function clampSlippage(value: string): string {
 export default function SlippageSection() {
   const t = useT();
   const slippage = useSwapStore((s) => s.slippage);
-  const customSlippage = useSwapStore((s) => s.customSlippage);
+  const storeCustomSlippage = useSwapStore((s) => s.customSlippage);
+
+  // Local state for instant feedback; debounce the store update.
+  const [localCustom, setLocalCustom] = useState(storeCustomSlippage);
+
+  // Sync store → local when store changes externally (e.g. preset click).
+  useEffect(() => {
+    setLocalCustom(storeCustomSlippage);
+  }, [storeCustomSlippage]);
+
+  const commitToStore = useDebouncedCallback(
+    (value: string) => setCustomSlippage(value),
+    150,
+  );
 
   function handleCustomChange(raw: string) {
-    const sanitized = sanitizeAmount(raw, MAX_SLIPPAGE_DECIMALS);
-    setCustomSlippage(clampSlippage(sanitized));
+    const sanitized = clampSlippage(sanitizeAmount(raw, MAX_SLIPPAGE_DECIMALS));
+    setLocalCustom(sanitized);
+    commitToStore(sanitized);
   }
 
   return (
@@ -55,8 +71,8 @@ export default function SlippageSection() {
           }`}
         >
           <span className="truncate">
-            {slippage === "custom" && customSlippage
-              ? `${customSlippage}%`
+            {slippage === "custom" && localCustom
+              ? `${localCustom}%`
               : t("settings.custom")}
           </span>
         </button>
@@ -68,7 +84,7 @@ export default function SlippageSection() {
             inputMode="decimal"
             autoComplete="off"
             spellCheck={false}
-            value={customSlippage}
+            value={localCustom}
             onChange={(e) => handleCustomChange(e.target.value)}
             placeholder="0.00"
             className="flex-1 bg-transparent font-['Inter'] text-sm text-[var(--s-text)] outline-none placeholder:text-[var(--s-text-dim)]"

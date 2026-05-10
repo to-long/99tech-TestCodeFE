@@ -4,6 +4,7 @@ import { TOKENS } from "../../SwapToken/data/tokens";
 import type { Token } from "../../SwapToken/types/token";
 import { useT } from "@shared/hooks/useT";
 import { useEscapeKey } from "@shared/hooks/useEscapeKey";
+import { useDebouncedCallback } from "@shared/hooks/useDebouncedCallback";
 import { useModalAnimation } from "../hooks/useModalAnimation";
 import { filterTokens, partitionTokens } from "../utils/filterTokens";
 import TokenSearchInput from "./TokenSearchInput";
@@ -18,14 +19,25 @@ interface Props {
 export default function TokenSelector({ selectedSymbol, onSelect, onClose }: Props) {
   const t = useT();
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const { visible, close } = useModalAnimation();
+
+  const commitSearch = useDebouncedCallback(
+    (value: string) => setDebouncedSearch(value),
+    150,
+  );
+
+  function handleSearch(value: string) {
+    setSearch(value);         // instant visual feedback
+    commitSearch(value);      // debounced filter
+  }
 
   const handleClose = () => close(onClose);
   const handleSelect = (token: Token) => close(() => onSelect(token));
 
   useEscapeKey(handleClose);
 
-  const { mostUsed, available } = partitionTokens(filterTokens(TOKENS, search));
+  const { mostUsed, available } = partitionTokens(filterTokens(TOKENS, debouncedSearch));
 
   return (
     <div
@@ -61,7 +73,7 @@ export default function TokenSelector({ selectedSymbol, onSelect, onClose }: Pro
         <TokenSearchInput
           value={search}
           placeholder={t("tokenSelector.search")}
-          onChange={setSearch}
+          onChange={handleSearch}
         />
 
         {/* Token List */}

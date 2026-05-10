@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
 import { useSwapStore, setFromAmount } from "../store/useSwapStore";
 import { sanitizeAmount, validateAmount } from "../utils/amountValidation";
+import { useDebouncedCallback } from "@shared/hooks/useDebouncedCallback";
 
 export interface SwapFormValues {
   fromAmount: string;
@@ -46,12 +47,16 @@ export function useSwapForm(): UseSwapFormResult {
 
   const fromAmount = watch("fromAmount");
 
-  // Sync valid form value to the store. We push every sanitized value
-  // (even invalid ones, like an empty string) so derived UI stays consistent
-  // with what the user sees.
+  // Debounce the store sync so rapid keystrokes don't trigger a
+  // re-render cascade on every character.
+  const syncToStore = useDebouncedCallback(
+    (value: string) => setFromAmount(value),
+    150,
+  );
+
   useEffect(() => {
-    setFromAmount(fromAmount ?? "");
-  }, [fromAmount]);
+    syncToStore(fromAmount ?? "");
+  }, [fromAmount, syncToStore]);
 
   // When the token changes, balance changes — re-run validation.
   useEffect(() => {

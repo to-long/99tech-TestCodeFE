@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithIntl } from "@test/renderWithIntl";
 import SlippageSection from "./SlippageSection";
@@ -30,7 +30,9 @@ describe("SlippageSection", () => {
 
     const input = await screen.findByPlaceholderText("0.00");
     await userEvent.type(input, "2.5");
-    expect(useSwapStore.getState().customSlippage).toBe("2.5");
+    await waitFor(() =>
+      expect(useSwapStore.getState().customSlippage).toBe("2.5"),
+    );
   });
 
   it("strips letters from the custom input", async () => {
@@ -41,7 +43,9 @@ describe("SlippageSection", () => {
     await userEvent.type(input, "abc1.5xyz");
 
     expect(input.value).toBe("1.5");
-    expect(useSwapStore.getState().customSlippage).toBe("1.5");
+    await waitFor(() =>
+      expect(useSwapStore.getState().customSlippage).toBe("1.5"),
+    );
   });
 
   it("clamps custom slippage to a maximum of 100%", async () => {
@@ -52,7 +56,9 @@ describe("SlippageSection", () => {
     await userEvent.type(input, "9999");
 
     expect(input.value).toBe("100");
-    expect(useSwapStore.getState().customSlippage).toBe("100");
+    await waitFor(() =>
+      expect(useSwapStore.getState().customSlippage).toBe("100"),
+    );
   });
 
   it("limits custom slippage to 2 decimal places", async () => {
